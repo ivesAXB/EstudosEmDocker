@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+
+    database: 
+    image: postgres:15-alpine
+    environment:
+    - POSTGRES_PASSWORD=senhasecreta
+    ports: 
+    - "5432:5432"
+    volumes:
+    - awards_db_data:/var/lib/postgresql/data
+
+api:
+    container_name: awards_api
+    build: ./backend
+    ports:
+    - "8000:8000"
+    environment:
+    - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/postgres
+    - SPRING_DATASOURCE_USERNAME=postgres
+    - SPRING_DATASOURCE_PASSWORD=senhasecreta
+    depends_on:
+    - database
+
+frontend:
+    container_name: awards_frontend
+    build: ./frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - api
+volumes:
+    awards_db_data:
+    name: awards_db_data

@@ -1,0 +1,14 @@
+# Arquivos e pastas do IntelliJ
+.idea/
+*.iml
+
+# Arquivos de compilação do Maven/Java
+target/
+*.jar
+
+# Logs
+*.log
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
